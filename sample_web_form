@@ -1,0 +1,201 @@
+<!doctype>
+<html>
+
+<head>
+	<title>Simple Form to Enter Contact Information</title>
+	<style>
+		form {
+			font-family: sans-serif;
+		}
+
+		#nick{
+			margin-left: 4%;
+			display:none;
+			width: 50%;
+		}
+	</style>
+
+</head>
+
+<!--fun fact: the form attribute is new in HTML5-->
+<form>
+	<!--remember that for each label tag, you must use the for attribute in order to bind it to the input tag. be sure that the for attribute is set to the same value as the id tag within the input tag. this binding allows a user to click on the label and focus on its bound input element.-->
+
+  <fieldset>
+		<legend>Please Enter Your Contact Information</legend>
+		
+		<!--NAME-->
+		<label for='firstName'> First Name: </label>
+			<input type='text' name='firstName' id='firstName' required> <br>
+		<label for='lastName'> Last Name: </label>
+			<input type='text' name='lastName' id='lastName' required> <br>
+		<label for='yesNickname'> Nickname?: </label>
+			<!--onchange allows if someone clicks or doesn't click it using nicknameFunction-->
+			<input id='yesNickname' name='yesNickname' type='checkbox' value='yes' onchange='nicknameFunction()'/><br>
+				<div id='nick'>
+					<label for='nickname'>Nickname:</label>
+						<input type = "text" name = "nickname" id = "nickname">
+				</div> 
+
+	<!--hr creates a horizontal rule, ie a horizontal rule-->
+	<hr>
+
+	<!--BIRTHDAY & AGE-->
+	<label for = 'birthday'> <u>Birthday:</u> 
+		<input type = 'date' id ='birthday' value = 'birthday'>
+	</label> <br> 
+
+    <label for='age'><u> Age:</u> 1 
+    	<input type="range" name="age" min="1" max="100"> 100
+    </label> <br> 
+
+	<hr>	
+
+	<!--GENDER-->
+	<u>Gender:</u><br>
+	<!--label tag does not render anything special for the user, but increases usability so that when the user clicks on the text within the label element, it toggles the control. make sure that the name attribute (gender) is the same across each label, so that (for example) when you click on female, it select female AND unselects both male and other-->
+	<label for = 'male'>
+		<input type='radio' name='gender' id='male' value='male'> Male 
+	</label> <br>
+
+	<label for = 'female'>
+		<input type='radio' name='gender' id='female' value='female'> Female 
+	</label> <br>
+
+	<label for = 'other'>
+		<input type='radio' name='gender' id='other' value='other'> Other
+	</label> <br> 
+
+	<hr>
+
+	<!--EMAIL-->
+	Email:<br>
+	<label for='email'> Email address
+	  	<input type='email' id='email' name='emailOne' required> 
+  	</label> <br>
+
+  	<label for='email_confirm'> Confirm email address
+    	<input type='email' id='email_confirm' name='emailTwo' required onchange='return check()'>
+  	</label> <br> 
+
+	<!--return value makes sure the function runs and to return true or false-->
+
+  	<hr>
+
+  	<!--WEBSITE-->
+	<label for='website'> <u> Website: </u>
+		<input type="url" id='website' name="website">
+	</label> <br> 
+
+	<hr>
+
+	<!--ADDRESS-->
+	<u> Mailing Address: </u> <br> <br>
+
+	<label for='mailingStreet' >Street
+		<input type='text' name='mailingStreet' id='mailingStreet' required>
+	</label> <br>
+
+	<label for='mailingCity' >City
+		<input type='text' name='mailingCity' id='mailingCity' required>
+	</label> <br>
+
+	<label for='mailingState' >State/Province/Region
+		<input type='text' name='mailingState' id='mailingState' required>
+	</label> <br>
+
+	<label for='mailingZip'>Zip/Postal Code
+		<!--use pattern attribute to limit input for zip code entry. if you were to set the input type to number instead of text, a possible issue would reult if you were to enter '00000', since '00000' reads the same as '0' in computer science. -->
+		<input type='text' name='mailingZip' id='mailingZip' pattern='[0-9]{5}' required> 
+	</label> <br>
+
+	<label for='mailingCountry'>Country
+		<input type='text' name='mailingCountry' id='mailingCountry' required>
+	</label> <br> <br>
+
+	<input type='checkbox' name='billing' onclick='autofillBilling(this.form)'>
+
+	<em>Check this box if billing address and mailing address are the same</em> <br> <br>
+
+	<u> Billing Address: </u> <br>
+
+	<label for='billingStreet'>Street
+		<input type='text' name='billingStreet' id='billingStreet' required>
+	</label> <br>
+
+	<label for='billingCity'>City
+		<input type='text' name='billingCity' id='billingCity' required>
+	</label> <br>
+
+	<label for='billingState'>State/Province/Region
+		<input type='text' name='billingState' id='billingState' required>
+	</label> <br>
+
+	<label for='billingZip'>Zip/Postal Code
+		<input type='text' name='billingZip' id='billingZip' pattern='[0-9]{5}' required> 
+	</label> <br>
+
+	<label for='billingCountry'>Country
+		<input type='text' name='billingCountry' id='billingCountry' required>
+	</label> 
+
+  	<hr>
+
+  	<!--BEST METHOD OF CONTACT-->
+    <u> Best Way to Contact Me: </u> <br>
+    <label> 
+    	<input type="checkbox" name="contact1" value="Bike">Email
+    </label> <br>
+
+    <label> 
+    	<input type="checkbox" name="contact2" value="Bike">Phone
+    </label> <br> <br>
+
+	<input type='submit' onclick='return check();'>
+
+  </fieldset>
+</form>
+
+<script>
+
+//function that creates an option for inputting a nickname
+function nicknameFunction(){
+	//box is checked. executed when turn check box on. check 
+	if (document.getElementById('yesNickname').checked){
+	//display set to inline, instead of none (ie hidden)
+		document.getElementById('nick').style.display="inline";
+	//setting attribute to required and true forces person to enter their nickname if they've checked off that they have one
+		document.getElementById('nickname').setAttribute('required',true);
+	}
+	//executed when turn check box off. hide display by using none. typing in nickname not required anymore.by removing the attribute.
+	else{ 
+		document.getElementById('nickname').removeAttribute('required');
+		document.getElementById('nick').style.display="none";
+	}
+}
+
+
+//function that makes sure the first and confirmed email inputs match
+function check() {
+	var email1 = document.getElementById('email');
+    var email2 = document.getElementById('email_confirm');
+      if (email.value != email2.value) {
+        alert ('emails must match');
+//after user hits submit, returns false and stops code
+        return false;
+      }
+}
+
+//function that autofills billing address if it is same as the mailing address 
+function autofillBilling(addr) {
+  if(addr.billing.checked == true) {
+    addr.billingStreet.value = addr.mailingStreet.value;
+    addr.billingCity.value = addr.mailingCity.value;
+    addr.billingState.value = addr.mailingState.value;
+    addr.billingZip.value = addr.mailingZip.value;
+    addr.billingCountry.value = addr.mailingCountry.value;
+  }
+}
+
+</script>
+</html>
