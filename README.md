@@ -1,3 +1,3 @@
-![sample_form](https://cloud.githubusercontent.com/assets/10386036/20118016/f615644a-a5d0-11e6-97e5-221afdcfda79.png) <br>
+![sample_form](https://cloud.githubusercontent.com/assets/10386036/20118495/a9be666c-a5d2-11e6-8e14-40b4735f900f.png) <br>
 
 (preview)
