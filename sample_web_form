@@ -69,7 +69,7 @@
 	<hr>
 
 	<!--EMAIL-->
-	Email:<br>
+	<u>Email:<u><br>
 	<label for='email'> Email address
 	  	<input type='email' id='email' name='emailOne' required> 
   	</label> <br>
